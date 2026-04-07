@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coachella 2026 – Crew Logistics Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300..700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --color-bg:#0d0b08;
+  --color-surface:#161410;
+  --color-surface-2:#1d1b17;
+  --color-surface-offset:#252219;
+  --color-border:rgba(255,255,255,0.09);
+  --color-text:#e8e4db;
+  --color-text-muted:#9a9488;
+  --color-text-faint:#4f4d48;
+  --color-primary:#e8a830;
+  --color-primary-hover:#f0b840;
+  --color-accent:#c75b3a;
+  --color-success:#5a9e3a;
+  --radius-sm:0.375rem;--radius-md:0.5rem;--radius-lg:0.75rem;--radius-xl:1rem;--radius-full:9999px;
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;
+  --text-xs:clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
+  --text-sm:clamp(0.875rem,0.8rem + 0.35vw,1rem);
+  --text-base:clamp(1rem,0.95rem + 0.25vw,1.125rem);
+  --text-lg:clamp(1.125rem,1rem + 0.75vw,1.5rem);
+  --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans','Helvetica Neue',sans-serif;
+  --transition:180ms cubic-bezier(0.16,1,0.3,1);
+}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);line-height:1.6}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+a,button,[role="button"],input,select,textarea{transition:color var(--transition),background var(--transition),border-color var(--transition),box-shadow var(--transition)}
+
+.hero{position:relative;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--space-16) var(--space-6) var(--space-12);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(232,168,48,0.18) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 100%,rgba(199,91,58,0.12) 0%,transparent 60%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);background:rgba(232,168,48,0.1);border:1px solid rgba(232,168,48,0.25);border-radius:var(--radius-full);padding:var(--space-1) var(--space-4);margin-bottom:var(--space-5)}
+.hero-title{font-family:var(--font-display);font-size:var(--text-2xl);line-height:1.1;color:var(--color-text);margin-bottom:var(--space-4)}
+.hero-title em{color:var(--color-primary);font-style:italic}
+.hero-sub{font-size:var(--text-base);color:var(--color-text-muted);max-width:50ch;margin:0 auto}
+.cactus-row{font-size:1.6rem;letter-spacing:0.2em;margin-bottom:var(--space-4);opacity:0.7}
+
+.progress-bar-wrap{position:sticky;top:0;z-index:100;background:var(--color-surface);border-bottom:1px solid var(--color-border);padding:var(--space-3) var(--space-6);display:flex;align-items:center;gap:var(--space-4)}
+.progress-steps{display:flex;gap:var(--space-2);flex:1}
+.progress-step{flex:1;height:3px;border-radius:var(--radius-full);background:var(--color-surface-offset);transition:background 400ms ease}
+.progress-step.active{background:var(--color-primary)}
+.progress-step.done{background:rgba(232,168,48,0.4)}
+.progress-label{font-size:var(--text-xs);color:var(--color-text-muted);white-space:nowrap}
+
+.survey-wrap{max-width:640px;margin:0 auto;padding:var(--space-8) var(--space-6) var(--space-20)}
+
+.section{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-8);margin-bottom:var(--space-6);display:none}
+.section.active{display:block;animation:fadeSlideIn 350ms cubic-bezier(0.16,1,0.3,1) both}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.section-header{margin-bottom:var(--space-6)}
+.section-num{font-size:var(--text-xs);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-2)}
+.section-title{font-family:var(--font-display);font-size:var(--text-xl);line-height:1.2;margin-bottom:var(--space-2)}
+.section-desc{font-size:var(--text-sm);color:var(--color-text-muted)}
+
+.field{margin-bottom:var(--space-6)}
+.field:last-child{margin-bottom:0}
+.field-label{display:block;font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-2)}
+.field-hint{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2)}
+.field-required{color:var(--color-accent);margin-left:2px}
+
+input[type="text"],input[type="email"],input[type="date"],input[type="time"],select,textarea{width:100%;padding:var(--space-3) var(--space-4);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-sm);color:var(--color-text);outline:none;transition:border-color var(--transition),box-shadow var(--transition)}
+input[type="text"]:focus,input[type="email"]:focus,input[type="date"]:focus,input[type="time"]:focus,select:focus,textarea:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(232,168,48,0.15)}
+input[type="text"]::placeholder,textarea::placeholder{color:var(--color-text-faint)}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9488' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right var(--space-3) center;padding-right:var(--space-8)}
+option{background:var(--color-surface-2);color:var(--color-text)}
+textarea{resize:vertical;min-height:90px}
+
+.option-grid{display:grid;gap:var(--space-2)}
+.option-grid.cols-2{grid-template-columns:1fr 1fr}
+.option-card{display:flex;align-items:center;gap:var(--space-3);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-3) var(--space-4);cursor:pointer;transition:border-color var(--transition),background var(--transition)}
+.option-card:hover{border-color:rgba(232,168,48,0.35);background:var(--color-surface-offset)}
+.option-card input[type="radio"],.option-card input[type="checkbox"]{width:16px;height:16px;min-width:16px;accent-color:var(--color-primary);cursor:pointer}
+.option-card.selected{border-color:var(--color-primary);background:rgba(232,168,48,0.07)}
+.option-card-label{font-size:var(--text-sm)}
+.option-card-sub{font-size:var(--text-xs);color:var(--color-text-muted)}
+
+.divider{height:1px;background:var(--color-border);margin:var(--space-6) 0}
+
+/* MEAL PLAN TABLE */
+.meal-plan-wrapper{margin-bottom:var(--space-2)}
+.meal-plan-label{font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-2)}
+.meal-plan-note{font-size:var(--text-xs);color:var(--color-primary);margin-bottom:var(--space-3);font-style:italic}
+.meal-table{width:100%;border-collapse:collapse;font-size:var(--text-xs);border-radius:var(--radius-lg);overflow:hidden}
+.meal-table th{background:var(--color-surface-offset);color:var(--color-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;padding:var(--space-2) var(--space-3);text-align:left;border-bottom:1px solid var(--color-border)}
+.meal-table td{padding:var(--space-3);border-bottom:1px solid rgba(255,255,255,0.04);color:var(--color-text-muted);vertical-align:top;line-height:1.4}
+.meal-table tr:last-child td{border-bottom:none}
+.meal-table td:first-child{color:var(--color-text);font-weight:600;white-space:nowrap;min-width:90px}
+.meal-table tr:hover td{background:rgba(255,255,255,0.02)}
+.col-day{width:22%}
+.col-meal{width:26%}
+
+.shift-grid{display:grid;gap:var(--space-3)}
+.shift-card{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);display:flex;align-items:center;gap:var(--space-4);cursor:pointer;transition:border-color var(--transition),background var(--transition)}
+.shift-card:hover{border-color:rgba(232,168,48,0.35);background:var(--color-surface-offset)}
+.shift-card.selected{border-color:var(--color-primary);background:rgba(232,168,48,0.07)}
+.shift-card input[type="checkbox"]{width:16px;height:16px;min-width:16px;accent-color:var(--color-primary);cursor:pointer}
+.shift-icon{font-size:1.4rem}
+.shift-title{font-size:var(--text-sm);font-weight:600}
+.shift-detail{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:2px}
+.shift-badge{margin-left:auto;font-size:var(--text-xs);font-weight:600;padding:2px var(--space-2);border-radius:var(--radius-full);white-space:nowrap}
+.badge-cook{background:rgba(199,91,58,0.15);color:#e07a5a}
+.badge-clean{background:rgba(90,158,58,0.15);color:#7ec45a}
+
+.nav-row{display:flex;gap:var(--space-3);margin-top:var(--space-8)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:600;padding:var(--space-3) var(--space-6);border-radius:var(--radius-md);cursor:pointer;border:none;outline:none;transition:background var(--transition),box-shadow var(--transition),transform var(--transition)}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--color-primary);color:#0d0b08}
+.btn-primary:hover{background:var(--color-primary-hover);box-shadow:0 0 20px rgba(232,168,48,0.3)}
+.btn-ghost{background:transparent;color:var(--color-text-muted);border:1px solid var(--color-border)}
+.btn-ghost:hover{background:var(--color-surface-offset);color:var(--color-text)}
+.btn-full{width:100%}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+.sending-indicator{text-align:center;padding:var(--space-4);color:var(--color-text-muted);font-size:var(--text-sm);display:none}
+.sending-indicator.visible{display:block}
+
+/* SUCCESS */
+.success-screen{display:none;text-align:center;padding:var(--space-16) var(--space-6) var(--space-20);animation:fadeSlideIn 400ms both}
+.success-screen.visible{display:block}
+.success-icon{font-size:3.5rem;margin-bottom:var(--space-6)}
+.success-title{font-family:var(--font-display);font-size:var(--text-xl);margin-bottom:var(--space-4)}
+.success-sub{color:var(--color-text-muted);max-width:40ch;margin:0 auto var(--space-8)}
+.summary-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);text-align:left;max-width:480px;margin:0 auto var(--space-8)}
+.summary-row{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-4);padding:var(--space-3) 0;border-bottom:1px solid var(--color-border)}
+.summary-row:last-child{border-bottom:none}
+.summary-key{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;white-space:nowrap}
+.summary-val{font-size:var(--text-sm);text-align:right}
+
+/* SUBSTACK LINK CARD */
+.substack-card{
+  max-width:480px;margin:0 auto var(--space-6);
+  background:var(--color-surface);
+  border:1px solid rgba(232,168,48,0.25);
+  border-radius:var(--radius-xl);
+  padding:var(--space-5) var(--space-6);
+  text-decoration:none;
+  display:flex;align-items:center;gap:var(--space-4);
+  transition:border-color var(--transition),background var(--transition),box-shadow var(--transition);
+}
+.substack-card:hover{
+  border-color:rgba(232,168,48,0.55);
+  background:rgba(232,168,48,0.05);
+  box-shadow:0 0 24px rgba(232,168,48,0.12);
+}
+.substack-emoji{font-size:2rem;flex-shrink:0}
+.substack-text{}
+.substack-eyebrow{font-size:var(--text-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-1)}
+.substack-title{font-size:var(--text-sm);font-weight:600;color:var(--color-text);line-height:1.3}
+.substack-arrow{margin-left:auto;font-size:1.2rem;color:var(--color-primary);flex-shrink:0}
+
+.success-note{font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-2)}
+
+.error-msg{background:rgba(199,91,58,0.1);border:1px solid rgba(199,91,58,0.3);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);color:#e07a5a;margin-top:var(--space-4);display:none}
+.error-msg.visible{display:block}
+
+.survey-footer{text-align:center;padding:var(--space-8) var(--space-6);color:var(--color-text-faint);font-size:var(--text-xs)}
+
+@media(max-width:480px){
+  .section{padding:var(--space-6)}
+  .option-grid.cols-2{grid-template-columns:1fr}
+  .nav-row{flex-direction:column-reverse}
+  .btn{width:100%;justify-content:center}
+  .meal-table{font-size:0.7rem}
+  .meal-table td,.meal-table th{padding:var(--space-2)}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="cactus-row">🌵 🌵 🌵</div>
+  <div class="hero-badge">🎡 Coachella 2026 · Weekend 2 · April 17–19</div>
+  <h1 class="hero-title">Crew <em>Logistics</em> Survey</h1>
+  <p class="hero-sub">Help us plan the trip! Fill this out so we can coordinate arrivals, food shifts, and keep everyone fueled.</p>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-steps">
+    <div class="progress-step active" id="step-1"></div>
+    <div class="progress-step" id="step-2"></div>
+    <div class="progress-step" id="step-3"></div>
+  </div>
+  <span class="progress-label" id="progress-text">Step 1 of 3</span>
+</div>
+
+<div class="survey-wrap" id="survey-wrap">
+
+  <!-- SECTION 1: YOU -->
+  <div class="section active" id="section-1">
+    <div class="section-header">
+      <div class="section-num">Section 1 of 3</div>
+      <h2 class="section-title">About You</h2>
+      <p class="section-desc">Quick intro so we know who's who.</p>
+    </div>
+    <div class="field">
+      <label class="field-label" for="name">Your Name <span class="field-required">*</span></label>
+      <input type="text" id="name" placeholder="e.g. Jordan" autocomplete="given-name">
+    </div>
+    <div class="field">
+      <label class="field-label" for="email">Email Address <span class="field-required">*</span></label>
+      <span class="field-hint">Used to send you a confirmation and for group coordination.</span>
+      <input type="text" id="email" placeholder="jordan@email.com" autocomplete="email">
+    </div>
+    <div class="field">
+      <label class="field-label" for="phone">Phone Number</label>
+      <input type="text" id="phone" placeholder="+1 555-555-5555" autocomplete="tel">
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-primary" onclick="nextSection(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: TRAVEL -->
+  <div class="section" id="section-2">
+    <div class="section-header">
+      <div class="section-num">Section 2 of 3</div>
+      <h2 class="section-title">Arrival & Departure</h2>
+      <p class="section-desc">We're staying at the Airbnb April 16–21 in Indio. Let us know your travel window.</p>
+    </div>
+    <div class="field">
+      <label class="field-label">Arrival Date <span class="field-required">*</span></label>
+      <div class="option-grid cols-2">
+        <label class="option-card" onclick="selectRadio(this,'arrival')"><input type="radio" name="arrival" value="April 15 (early)"><div><div class="option-card-label">April 15</div><div class="option-card-sub">Early arrival</div></div></label>
+        <label class="option-card" onclick="selectRadio(this,'arrival')"><input type="radio" name="arrival" value="April 16 (move-in day)"><div><div class="option-card-label">April 16</div><div class="option-card-sub">Move-in day</div></div></label>
+        <label class="option-card" onclick="selectRadio(this,'arrival')"><input type="radio" name="arrival" value="April 17 (Day 1)"><div><div class="option-card-label">April 17</div><div class="option-card-sub">Festival Day 1</div></div></label>
+        <label class="option-card" onclick="selectRadio(this,'arrival')"><input type="radio" name="arrival" value="Other (see notes)"><div><div class="option-card-label">Other</div><div class="option-card-sub">See notes below</div></div></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="arrival-time">Estimated Arrival Time</label>
+      <input type="time" id="arrival-time">
+    </div>
+    <div class="divider"></div>
+    <div class="field">
+      <label class="field-label">Departure Date <span class="field-required">*</span></label>
+      <div class="option-grid cols-2">
+        <label class="option-card" onclick="selectRadio(this,'departure')"><input type="radio" name="departure" value="April 20 (day after festival)"><div><div class="option-card-label">April 20</div><div class="option-card-sub">Day after festival</div></div></label>
+        <label class="option-card" onclick="selectRadio(this,'departure')"><input type="radio" name="departure" value="April 21 (checkout day)"><div><div class="option-card-label">April 21</div><div class="option-card-sub">Checkout day</div></div></label>
+        <label class="option-card" onclick="selectRadio(this,'departure')"><input type="radio" name="departure" value="After April 21"><div><div class="option-card-label">After Apr 21</div><div class="option-card-sub">Extended stay</div></div></label>
+        <label class="option-card" onclick="selectRadio(this,'departure')"><input type="radio" name="departure" value="Other (see notes)"><div><div class="option-card-label">Other</div><div class="option-card-sub">See notes below</div></div></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="departure-time">Estimated Departure Time</label>
+      <input type="time" id="departure-time">
+    </div>
+    <div class="divider"></div>
+    <div class="field">
+      <label class="field-label">How are you getting to Indio? <span class="field-required">*</span></label>
+      <div class="option-grid">
+        <label class="option-card" onclick="selectRadio(this,'transport')"><input type="radio" name="transport" value="Driving myself"><div class="option-card-label">🚗 Driving myself</div></label>
+        <label class="option-card" onclick="selectRadio(this,'transport')"><input type="radio" name="transport" value="Carpooling with crew"><div class="option-card-label">🚙 Carpooling with crew</div></label>
+        <label class="option-card" onclick="selectRadio(this,'transport')"><input type="radio" name="transport" value="Flying in"><div class="option-card-label">✈️ Flying in</div></label>
+        <label class="option-card" onclick="selectRadio(this,'transport')"><input type="radio" name="transport" value="Rideshare / bus"><div class="option-card-label">🚌 Rideshare / bus</div></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="travel-notes">Travel Notes</label>
+      <span class="field-hint">Flight details, who you're riding with, pick-up needs, etc.</span>
+      <textarea id="travel-notes" placeholder="e.g. Landing at PSP at 2 PM on April 16, need a ride from airport"></textarea>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-ghost" onclick="prevSection(2)">← Back</button>
+      <button class="btn btn-primary" onclick="nextSection(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: FOOD & SHIFTS -->
+  <div class="section" id="section-3">
+    <div class="section-header">
+      <div class="section-num">Section 3 of 3</div>
+      <h2 class="section-title">Food & Shifts</h2>
+      <p class="section-desc">We're batch prepping meals from Costco. Check out the plan below, then volunteer for at least one shift!</p>
+    </div>
+
+    <!-- MEAL PLAN TABLE -->
+    <div class="field">
+      <div class="meal-plan-wrapper">
+        <div class="meal-plan-label">📋 Directional Meal Plan (April 16–21)</div>
+        <div class="meal-plan-note">✦ This is directional, not definitive — subject to change based on what we find at Costco and crew vibes.</div>
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th class="col-day">Day</th>
+              <th class="col-meal">Breakfast</th>
+              <th class="col-meal">Lunch</th>
+              <th class="col-meal">Late Night</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apr 16<br><span style="font-weight:400;color:var(--color-text-faint)">Arrival</span></td>
+              <td>Bagels + cream cheese + smoked salmon</td>
+              <td>Red lentil dal + rice + mashed potatoes</td>
+              <td>Frozen pizza + smoothies</td>
+            </tr>
+            <tr>
+              <td>Apr 17<br><span style="font-weight:400;color:var(--color-text-faint)">Day 1</span></td>
+              <td>Amylu sausage + scrambled eggs + roasted peppers + potatoes</td>
+              <td>Black bean bowl + cabbage slaw + guac</td>
+              <td>Kirkland nuggets + ramen + smoothies</td>
+            </tr>
+            <tr>
+              <td>Apr 18<br><span style="font-weight:400;color:var(--color-text-faint)">Day 2</span></td>
+              <td>Chia pudding + berries + granola</td>
+              <td>Hummus + veggie wrap + fruit</td>
+              <td>Frozen pizza + nuggets + smoothies</td>
+            </tr>
+            <tr>
+              <td>Apr 19<br><span style="font-weight:400;color:var(--color-text-faint)">Day 3</span></td>
+              <td>Berry smoothie bowl + walnuts + dark chocolate + lentils</td>
+              <td>Bean + grain bowl + broccoli + spinach salad</td>
+              <td>Ramen + nuggets + smoothies</td>
+            </tr>
+            <tr>
+              <td>Apr 20<br><span style="font-weight:400;color:var(--color-text-faint)">Recovery</span></td>
+              <td>Egg scramble + sausage + all the veggies</td>
+              <td>Leftover dal + steak + roasted sweet potato</td>
+              <td>Frozen pizza + ramen + smoothies</td>
+            </tr>
+            <tr>
+              <td>Apr 21<br><span style="font-weight:400;color:var(--color-text-faint)">Checkout</span></td>
+              <td>Bagels + whatever remains</td>
+              <td>Pack snacks for the drive</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- COOKING SHIFTS -->
+    <div class="field">
+      <label class="field-label">Cooking Shifts <span class="field-required">*</span></label>
+      <span class="field-hint">Select all that you can do. Each shift is ~45 min.</span>
+      <div class="shift-grid">
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Arrival Day Big Prep (Apr 16 PM)"><div class="shift-icon">🍳</div><div><div class="shift-title">Arrival Day Big Prep</div><div class="shift-detail">April 16, PM · Batch cook chicken, dal, mashed potatoes, chia pudding</div></div><span class="shift-badge badge-cook">COOK</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Day 1 Breakfast Setup (Apr 17 AM)"><div class="shift-icon">🥣</div><div><div class="shift-title">Day 1 Breakfast Setup</div><div class="shift-detail">April 17, AM · Set out breakfast spread for the group</div></div><span class="shift-badge badge-cook">COOK</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Day 2 Breakfast Setup (Apr 18 AM)"><div class="shift-icon">🥣</div><div><div class="shift-title">Day 2 Breakfast Setup</div><div class="shift-detail">April 18, AM · Set out breakfast, refresh fruit + snacks</div></div><span class="shift-badge badge-cook">COOK</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Day 3 Breakfast Setup (Apr 19 AM)"><div class="shift-icon">🥣</div><div><div class="shift-title">Day 3 Breakfast Setup</div><div class="shift-detail">April 19, AM · Final day spread, pack smoothie ingredients</div></div><span class="shift-badge badge-cook">COOK</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Late Night Cook (any night)"><div class="shift-icon">🍕</div><div><div class="shift-title">Late Night Cook</div><div class="shift-detail">Any night · Nuggets, pizza, ramen, smoothies after the festival</div></div><span class="shift-badge badge-cook">COOK</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Recovery Day Cook (Apr 20)"><div class="shift-icon">🥘</div><div><div class="shift-title">Recovery Day Cook</div><div class="shift-detail">April 20 · Use up leftovers, steak & eggs, dal</div></div><span class="shift-badge badge-cook">COOK</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CLEANING SHIFTS -->
+    <div class="field">
+      <label class="field-label">Cleaning & Assist Shifts <span class="field-required">*</span></label>
+      <span class="field-hint">Select all that work for you. Shifts are ~20–30 min.</span>
+      <div class="shift-grid">
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Post-Breakfast Cleanup (any morning)"><div class="shift-icon">🧽</div><div><div class="shift-title">Post-Breakfast Cleanup</div><div class="shift-detail">Any morning · Dishes, counters, pack snack bags</div></div><span class="shift-badge badge-clean">CLEAN</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Late Night Cleanup (any night)"><div class="shift-icon">🧹</div><div><div class="shift-title">Late Night Cleanup</div><div class="shift-detail">Any night · After ramen & pizza — wipe down kitchen</div></div><span class="shift-badge badge-clean">CLEAN</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Checkout Deep Clean (Apr 20-21)"><div class="shift-icon">🫧</div><div><div class="shift-title">Checkout Deep Clean</div><div class="shift-detail">April 20–21 · Full kitchen + common areas reset for checkout</div></div><span class="shift-badge badge-clean">CLEAN</span></label>
+        <label class="shift-card" onclick="toggleShift(this)"><input type="checkbox" name="shifts" value="Costco Run Helper (Apr 15-16)"><div class="shift-icon">🛒</div><div><div class="shift-title">Costco Run Helper</div><div class="shift-detail">April 15–16 · Help load and unload the Costco haul</div></div><span class="shift-badge badge-clean">ASSIST</span></label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FOOD REQUESTS -->
+    <div class="field">
+      <label class="field-label" for="food-ideas">Food Ideas, Requests & Feedback</label>
+      <span class="field-hint">Anything you want to add to the meal plan, swap out, or bring yourself? Dietary needs, favorite snacks, strong opinions — all welcome.</span>
+      <textarea id="food-ideas" placeholder="e.g. Can we add birria tacos on recovery day? I'll bring Tajín. Also please don't make anything with cilantro 🙏"></textarea>
+    </div>
+
+    <div class="error-msg" id="error-msg">⚠️ Something went wrong submitting your response. Please try again — or screenshot this page and send it to Ratul directly.</div>
+    <div class="sending-indicator" id="sending-indicator">⏳ Submitting your response...</div>
+
+    <div class="nav-row">
+      <button class="btn btn-ghost" onclick="prevSection(3)">← Back</button>
+      <button class="btn btn-primary btn-full" id="submit-btn" onclick="submitSurvey()">✅ Submit My Response</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">🌵🎉🌵</div>
+    <h2 class="success-title">You're locked in!</h2>
+    <p class="success-sub">Thanks for filling this out. A confirmation is on its way to your email. We'll use your answers to finalize the crew logistics plan.</p>
+
+    <div class="summary-card" id="summary-card"></div>
+
+    <!-- SUBSTACK LINK -->
+    <a class="substack-card" href="https://open.substack.com/pub/chaoticneutralx/p/the-ultimate-recreational-drug-tier?utm_campaign=post-expanded-share&utm_medium=web" target="_blank" rel="noopener noreferrer">
+      <div class="substack-emoji">📖</div>
+      <div class="substack-text">
+        <div class="substack-eyebrow">Required Reading</div>
+        <div class="substack-title">The Ultimate Recreational Drug Tier List</div>
+      </div>
+      <div class="substack-arrow">→</div>
+    </a>
+
+    <p class="success-note">Responses collected by Web3Forms and emailed to the trip organizer.</p>
+  </div>
+
+</div>
+
+<div class="survey-footer">Coachella 2026 · Weekend 2 · April 16–21 · Indio, CA</div>
+
+<script>
+const WEB3FORMS_KEY = "9fe9882a-697e-4fb3-85bc-e6685dcfc3b2";
+
+let currentSection = 1;
+const totalSections = 3;
+
+function updateProgress(n){
+  for(let i=1;i<=totalSections;i++){
+    const el=document.getElementById('step-'+i);
+    if(i<n)el.className='progress-step done';
+    else if(i===n)el.className='progress-step active';
+    else el.className='progress-step';
+  }
+  document.getElementById('progress-text').textContent='Step '+n+' of '+totalSections;
+}
+
+function showSection(n){
+  for(let i=1;i<=totalSections;i++){
+    document.getElementById('section-'+i).classList.remove('active');
+  }
+  const el=document.getElementById('section-'+n);
+  if(el)el.classList.add('active');
+  updateProgress(n);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextSection(from){
+  if(from===1){
+    const name=document.getElementById('name').value.trim();
+    const email=document.getElementById('email').value.trim();
+    if(!name||!email){alert('Please fill in your name and email.');return}
+  }
+  if(from===2){
+    const arrival=document.querySelector('input[name="arrival"]:checked');
+    const departure=document.querySelector('input[name="departure"]:checked');
+    const transport=document.querySelector('input[name="transport"]:checked');
+    if(!arrival||!departure||!transport){alert('Please select your arrival date, departure date, and transportation method.');return}
+  }
+  currentSection=from+1;
+  showSection(currentSection);
+}
+
+function prevSection(from){
+  currentSection=from-1;
+  showSection(currentSection);
+}
+
+function selectRadio(card,name){
+  document.querySelectorAll('input[name="'+name+'"]').forEach(r=>{
+    r.closest('.option-card').classList.remove('selected');
+  });
+  card.classList.add('selected');
+}
+
+function toggleShift(card){
+  const cb=card.querySelector('input[type="checkbox"]');
+  card.classList.toggle('selected',cb.checked);
+}
+
+async function submitSurvey(){
+  const shifts=[...document.querySelectorAll('input[name="shifts"]:checked')].map(c=>c.value);
+  if(shifts.length===0){alert('Please volunteer for at least one shift!');return}
+
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const arrivalEl=document.querySelector('input[name="arrival"]:checked');
+  const departureEl=document.querySelector('input[name="departure"]:checked');
+  const transportEl=document.querySelector('input[name="transport"]:checked');
+  const arrivalTime=document.getElementById('arrival-time').value;
+  const departureTime=document.getElementById('departure-time').value;
+  const travelNotes=document.getElementById('travel-notes').value.trim();
+  const foodIdeas=document.getElementById('food-ideas').value.trim();
+
+  const arrivalStr=(arrivalEl?arrivalEl.value:'?')+(arrivalTime?' @ '+arrivalTime:'');
+  const departureStr=(departureEl?departureEl.value:'?')+(departureTime?' @ '+departureTime:'');
+
+  const rows=[
+    ['Name',name],['Email',email],['Phone',phone||'—'],
+    ['Arrival',arrivalStr],['Departure',departureStr],
+    ['Transport',transportEl?transportEl.value:'?'],
+    ['Travel Notes',travelNotes||'—'],
+    ['Shifts',shifts.join(' | ')],
+    ['Food Ideas & Requests',foodIdeas||'—'],
+  ];
+
+  const submitBtn=document.getElementById('submit-btn');
+  const sendingEl=document.getElementById('sending-indicator');
+  const errorEl=document.getElementById('error-msg');
+  submitBtn.disabled=true;
+  sendingEl.classList.add('visible');
+  errorEl.classList.remove('visible');
+
+  try{
+    const payload={
+      access_key:WEB3FORMS_KEY,
+      subject:"🌵 Coachella 2026 Survey — "+name,
+      from_name:name,
+      email:email,
+      Name:name,Email:email,Phone:phone||"—",
+      Arrival:arrivalStr,Departure:departureStr,
+      Transportation:transportEl?transportEl.value:"?",
+      "Travel Notes":travelNotes||"—",
+      "Shifts Volunteered":shifts.join(" | "),
+      "Food Ideas & Requests":foodIdeas||"—",
+      redirect:"false",
+    };
+
+    const res=await fetch("https://api.web3forms.com/submit",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify(payload)
+    });
+    const data=await res.json();
+
+    if(data.success){
+      const summaryHTML=rows.map(([k,v])=>
+        `<div class="summary-row"><span class="summary-key">${k}</span><span class="summary-val">${v}</span></div>`
+      ).join('');
+      document.getElementById('summary-card').innerHTML=summaryHTML;
+      document.getElementById('survey-wrap').style.display='none';
+      document.querySelector('.progress-bar-wrap').style.display='none';
+      document.getElementById('success-screen').style.display='block';
+      document.getElementById('success-screen').classList.add('visible');
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else {
+      throw new Error(data.message||'Submission failed');
+    }
+  } catch(err){
+    submitBtn.disabled=false;
+    sendingEl.classList.remove('visible');
+    errorEl.classList.add('visible');
+    console.error('Submission error:',err);
+  }
+}
+</script>
+</body>
+</html>
