@@ -190,7 +190,7 @@ textarea{resize:vertical;min-height:90px}
   <p class="hero-sub">Help us plan the trip! Fill this out so we can coordinate arrivals, food shifts, and keep everyone fueled.</p>
 </div>
 
-<div class="progress-bar-wrap">
+<div class="progress-bar-wrap" id="progress-bar-wrap">
   <div class="progress-steps">
     <div class="progress-step active" id="step-1"></div>
     <div class="progress-step" id="step-2"></div>
@@ -393,27 +393,26 @@ textarea{resize:vertical;min-height:90px}
     </div>
   </div>
 
-  <!-- SUCCESS -->
-  <div class="success-screen" id="success-screen">
-    <div class="success-icon">🌵🎉🌵</div>
-    <h2 class="success-title">You're locked in!</h2>
-    <p class="success-sub">Thanks for filling this out. A confirmation is on its way to your email. We'll use your answers to finalize the logistics plan.</p>
+</div><!-- end #survey-wrap -->
 
-    <div class="summary-card" id="summary-card"></div>
+<!-- SUCCESS (outside survey-wrap, no duplicates) -->
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">🌵🎉🌵</div>
+  <h2 class="success-title">You're locked in!</h2>
+  <p class="success-sub">Thanks for filling this out. A confirmation is on its way to your email. We'll use your answers to finalize the logistics plan.</p>
 
-    <!-- SUBSTACK LINK -->
-    <a class="substack-card" href="https://open.substack.com/pub/chaoticneutralx/p/the-ultimate-recreational-drug-tier?utm_campaign=post-expanded-share&utm_medium=web" target="_blank" rel="noopener noreferrer">
-      <div class="substack-emoji">📖</div>
-      <div class="substack-text">
-        <div class="substack-eyebrow">Required Reading</div>
-        <div class="substack-title">The Ultimate Recreational Drug Tier List</div>
-      </div>
-      <div class="substack-arrow">→</div>
-    </a>
+  <div class="summary-card" id="summary-card"></div>
 
-    <p class="success-note">Responses collected by Web3Forms and emailed to the trip organizer.</p>
-  </div>
+  <a class="substack-card" href="https://open.substack.com/pub/chaoticneutralx/p/the-ultimate-recreational-drug-tier?utm_campaign=post-expanded-share&utm_medium=web" target="_blank" rel="noopener noreferrer">
+    <div class="substack-emoji">📖</div>
+    <div class="substack-text">
+      <div class="substack-eyebrow">Required Reading</div>
+      <div class="substack-title">The Ultimate Recreational Drug Tier List</div>
+    </div>
+    <div class="substack-arrow">→</div>
+  </a>
 
+  <p class="success-note">Responses collected by Web3Forms and emailed to the trip organizer.</p>
 </div>
 
 <div class="survey-footer">Coachella 2026 · Weekend 2 · April 16–21 · Indio, CA</div>
@@ -539,9 +538,10 @@ async function submitSurvey(){
       ).join('');
       document.getElementById('summary-card').innerHTML=summaryHTML;
       document.getElementById('survey-wrap').style.display='none';
-      document.querySelector('.progress-bar-wrap').style.display='none';
-      document.getElementById('success-screen').style.display='block';
-      document.getElementById('success-screen').classList.add('visible');
+      document.getElementById('progress-bar-wrap').style.display='none';
+      const successEl=document.getElementById('success-screen');
+      successEl.style.display='block';
+      successEl.classList.add('visible');
       window.scrollTo({top:0,behavior:'smooth'});
     } else {
       throw new Error(data.message||'Submission failed');
@@ -554,42 +554,5 @@ async function submitSurvey(){
   }
 }
 </script>
-<div id="sending-indicator" class="sending-indicator">
-  ⏳ Submitting your response...
-</div>
-
-<div id="error-msg" class="error-msg">
-  ⚠️ Something went wrong submitting your response. Please try again — or screenshot this page and send it to Ratul directly.
-</div>
-
-<div id="success-screen" class="success-screen">
-  <div class="success-icon">🌵🎉🌵</div>
-  <h2 class="success-title">You're locked in!</h2>
-  <p class="success-sub">
-    Thanks for filling this out. A confirmation is on its way to your email. We'll use your answers to finalize the logistics plan.
-  </p>
-
-  <div id="summary-card" class="summary-card"></div>
-
-  <a class="substack-card" href="https://open.substack.com/pub/chaoticneutralx/p/the-ultimate-recreational-drug-tier?utm_campaign=post-expanded-share&utm_medium=web" target="_blank" rel="noopener noreferrer">
-    <div class="substack-emoji">📖</div>
-    <div class="substack-text">
-      <div class="substack-eyebrow">Required Reading</div>
-      <div class="substack-title">The Ultimate Recreational Drug Tier List</div>
-    </div>
-    <div class="substack-arrow">→</div>
-  </a>
-
-  <div class="success-note">
-    Responses collected by Web3Forms and emailed to the trip organizer.
-  </div>
-</div>
-
-<footer class="survey-footer">
-  Coachella 2026 · Weekend 2 · April 16–21 · Indio, CA
-</footer>
-
-</body>
-</html>
 </body>
 </html>
